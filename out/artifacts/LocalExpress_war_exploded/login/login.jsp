@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -24,17 +25,12 @@
                 <input type="submit" value="login">
             </form>
 
-            <%
-                //判断是否回传参数信息,回传则说明用户名或密码出错,提示用户
-                String err = request.getParameter("err");
-                if (err != null) {
-                    out.print("<p style='color:red'>用户名或密码出错</p>");
-                }
-            %>
-
-            <a href="register.jsp"><p>Not a Member? Click Here</p></a>
-        </div>
-    </div>
+            <c:if test="${user != null && user == 'failed'}">
+                <p style='color:red'>用户名或密码出错</p>
+            </c:if>
+<a href="register.jsp"><p>Not a Member? Click Here</p></a>
+</div>
+</div>
 </div>
 <div class="footer">
     <p>&copy 2016 Local Express Login Form . All rights reserved | Design by <a>Five Old Star.</a></p>

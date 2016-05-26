@@ -54,6 +54,16 @@ public class DBbean {
             e.printStackTrace();
         }
     }
+
+    public void update(String sql) {
+
+        try {
+            p = conn.prepareStatement(sql);
+            p.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public ResultSet select(String sql,List parm) {
         preparedSql(sql,parm);
 
@@ -81,6 +91,5 @@ public class DBbean {
         }
     }
     public static void main(String[] args) throws SQLException {
-
     }
 }

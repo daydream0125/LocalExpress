@@ -1,5 +1,6 @@
 package com.localexpress.controller;
 
+import com.localexpress.model.User;
 import com.localexpress.services.UserService;
 
 import javax.servlet.ServletException;
@@ -17,19 +18,30 @@ public class Login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+
+        HttpSession session = request.getSession();
+
         UserService userService = new UserService();
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
+        User user = null;
         try {
-            if(userService.checkUser(userName,password)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("userName",userName);
-                request.getRequestDispatcher("index.jsp").forward(request,response);
-            } else {
-                request.getRequestDispatcher("login/login.jsp?err='aaa'").forward(request,response);
-            }
+            user = userService.checkUser(userName, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if (user != null) {
+            //用户有效则将该用户信息封装到session中
+            session.setAttribute("user", user);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else {
+            //用户信息无效则将错误信息放置在request中,采用相同的参数名user是为了前台验证方便
+            request.setAttribute("user","failed");
+            request.getRequestDispatcher("login/login.jsp").forward(request, response);
+        }
+
     }
 }

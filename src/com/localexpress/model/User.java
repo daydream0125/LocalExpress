@@ -8,8 +8,19 @@ public class User {
     private String address;
     private String email;
     private String realName;
+    private String flag;
+    private int money;
 
-    public User(String userName, String password, String sex, String tel, String address, String email, String realName) {
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public User(String userName, String password, String sex, String tel, String address, String email, String realName, String flag, int money) {
+
         this.userName = userName;
         this.password = password;
         this.sex = sex;
@@ -17,6 +28,29 @@ public class User {
         this.address = address;
         this.email = email;
         this.realName = realName;
+        this.flag = flag;
+        this.money = money;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
+    public User(String userName, String password, String sex, String tel,
+                String address, String email, String realName, String flag) {
+        this.userName = userName;
+        this.password = password;
+        this.sex = sex;
+        this.tel = tel;
+        this.address = address;
+        this.email = email;
+        this.realName = realName;
+        this.flag = flag;
+
     }
 
     public String getRealName() {

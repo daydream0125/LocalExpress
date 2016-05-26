@@ -32,7 +32,7 @@ public class Register extends HttpServlet {
         String address = request.getParameter("address");
         String realName = request.getParameter("realname");
 
-        User user = new User(userName, password, sex, tel, email, address, realName);
+        User user = new User(userName, password, sex, tel, email, address, realName,"false");
         UserService userService = new UserService();
 
         try {
